@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Associate;
 import com.example.demo.service.AssociateService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/associate")
+@Slf4j
 public class AssociateController {
 
 	@Autowired
@@ -28,15 +31,17 @@ public class AssociateController {
 	public ResponseEntity<List<Associate>> findAllassociates() {
 		return ResponseEntity.status(HttpStatus.OK).body(associateService.findAllassociates());
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Associate> createAssociate(@RequestBody Associate associate) {
+		log.info("inside createAssociate method POST");
 		return ResponseEntity.status(HttpStatus.CREATED).body(associateService.createAssociate(associate));
 
 	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Associate> findById(@PathVariable("id") int id) {
+		log.info("inside findById() ");
 		return ResponseEntity.status(HttpStatus.OK).body(associateService.findById(id));
 	}
 
